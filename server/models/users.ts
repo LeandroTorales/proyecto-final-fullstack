@@ -7,7 +7,7 @@ export interface InterfaceUsers {
   password: string;
   rol?: string;
   code?: number;
-  verifed?: boolean;
+  verified?: boolean;
 }
 
 const SchemaUsuario = new Schema<InterfaceUsers>({
@@ -17,6 +17,7 @@ const SchemaUsuario = new Schema<InterfaceUsers>({
   },
   email: {
     type: String,
+    unique: true,
     required: [true, "El email es requerido"],
   },
   password: {
@@ -30,7 +31,7 @@ const SchemaUsuario = new Schema<InterfaceUsers>({
   code: {
     type: Number,
   },
-  verifed: {
+  verified: {
     type: Boolean,
     default: false,
   },
