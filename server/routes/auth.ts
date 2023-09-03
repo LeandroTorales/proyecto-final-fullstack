@@ -26,7 +26,6 @@ authRouter.patch(
     check("email", "El email es obligatorio").not().isEmpty().isEmail(),
     check("code", "El codigo de verificación es obligatorio.").not().isEmpty(),
     check("code", "El código proporcionado no contiene los caracteres necesarios.").isLength({
-      min: 6,
       max: 6,
     }),
     recolectErrorsMiddlewares,
