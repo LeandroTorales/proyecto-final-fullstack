@@ -117,7 +117,7 @@ const Navbar = () => {
       <ul className={`${stateActiveMenu ? "active" : ""}`}>
         <ItemOfNavbar to="/">Home</ItemOfNavbar>
         <ItemOfNavbar to="/juegos">Juegos</ItemOfNavbar>
-        <ItemOfNavbar to="/juegos" icon={<AiOutlineUser />} />
+        <ItemOfNavbar to="/auth" icon={<AiOutlineUser />} />
         <ItemOfNavbar to="/cart" icon={<AiOutlineShoppingCart />} />
       </ul>
       <FaBars className="logoBarsHamburguesa" onClick={() => dispatch(toggleMenu())}></FaBars>

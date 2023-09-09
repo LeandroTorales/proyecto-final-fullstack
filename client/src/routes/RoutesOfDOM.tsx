@@ -5,6 +5,7 @@ import { scrollToTop } from "../utils/scrollToTop";
 import Juegos from "../pages/juegos/Juegos";
 import GameDetailPanel from "../components/gameDetailPanel/GameDetailPanel";
 import Cart from "../pages/cart/Cart";
+import Auth from "../pages/auth/Auth";
 
 const RoutesOfDOM = () => {
   const { pathname } = useLocation();
@@ -18,6 +19,7 @@ const RoutesOfDOM = () => {
       <Route path="/" element={<Home />} />
       <Route path="/juegos" element={<Juegos />} />
       <Route path="/juegos/:juegoIdParam" element={<GameDetailPanel />} />
+      <Route path="/auth" element={<Auth />} />
       <Route path="/cart" element={<Cart />} />
     </Routes>
   );
