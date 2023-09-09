@@ -34,6 +34,7 @@ const Form = styled.form`
         border: none;
         font-size: 1.2rem;
         cursor: pointer;
+        text-decoration: underline;
         &:active {
           color: blue;
         }
