@@ -20,12 +20,19 @@ const FormField = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  font-size: 1.3rem;
+  label {
+    font-size: 1.1rem;
+  }
   input {
     font-size: 1.2rem;
     padding: 5px;
     border: 1px solid black;
     border-radius: 5px;
+  }
+  p {
+    color: red;
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 `;
 
