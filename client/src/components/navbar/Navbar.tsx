@@ -99,6 +99,7 @@ const ContainerMain = styled.div`
 
 const Navbar = () => {
   const stateActiveMenu = useSelector((state: RootStateType) => state.toggleMenuSlice.activeMenu);
+  const isCurrentUser = useSelector((state: RootStateType) => state.authSlice.currentUser);
   const dispatch = useDispatch<dispatchType>();
 
   return (
@@ -117,7 +118,11 @@ const Navbar = () => {
       <ul className={`${stateActiveMenu ? "active" : ""}`}>
         <ItemOfNavbar to="/">Home</ItemOfNavbar>
         <ItemOfNavbar to="/juegos">Juegos</ItemOfNavbar>
-        <ItemOfNavbar to="/auth" icon={<AiOutlineUser />} />
+        {Object.keys(isCurrentUser).length === 0 ? (
+          <ItemOfNavbar to="/auth" icon={<AiOutlineUser />} />
+        ) : (
+          <ItemOfNavbar to="/verify">{isCurrentUser.usuario.nombre}</ItemOfNavbar>
+        )}
         <ItemOfNavbar to="/cart" icon={<AiOutlineShoppingCart />} />
       </ul>
       <FaBars className="logoBarsHamburguesa" onClick={() => dispatch(toggleMenu())}></FaBars>

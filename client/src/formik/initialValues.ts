@@ -9,3 +9,8 @@ export const initialValuesLogin = {
   email: "",
   password: "",
 };
+
+export const initialValuesVerify = {
+  email: "",
+  code: "",
+};

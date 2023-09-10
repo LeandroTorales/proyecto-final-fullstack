@@ -9,6 +9,8 @@ import { dispatchType } from "../../../redux/store";
 import { toggleFormAction } from "../../../redux/slices/auth/authSlice";
 import styled from "styled-components";
 import ButtonSignIn from "../components/ButtonSignIn";
+import { authRegister } from "../../../axios/auth/authRegister";
+import { Link, useNavigate } from "react-router-dom";
 
 const Form = styled.form`
   width: 100%;
@@ -40,6 +42,9 @@ const Form = styled.form`
       }
     }
   }
+  a {
+    text-decoration: underline;
+  }
   .wrapper:last-of-type {
     margin-top: 15px;
   }
@@ -47,13 +52,24 @@ const Form = styled.form`
 
 const AuthRegister = () => {
   const dispatch = useDispatch<dispatchType>();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: initialValuesRegister,
     validationSchema: validationSchemaRegister,
     onSubmit: async (values, actions) => {
-      console.log(values);
-      return;
+      const { email, password } = values;
+      const nombre = `${values.name} ${values.surname}`;
+      const user = await authRegister({ nombre, email, password });
+      if (user) {
+        actions.resetForm();
+        alert(
+          "Te has registrado correctamente, te estamos redirigiendo a la página de verificaciond de usuarios."
+        );
+        return setTimeout(() => {
+          navigate("/verify");
+        }, 1000);
+      }
     },
   });
 
@@ -125,6 +141,7 @@ const AuthRegister = () => {
               Inicia sesion haciendo click aquí.
             </button>
           </p>
+          <Link to={"/verify"}>Verificación de código.</Link>
         </div>
       </Form>
     </>

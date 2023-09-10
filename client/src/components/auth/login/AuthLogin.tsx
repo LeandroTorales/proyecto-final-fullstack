@@ -1,6 +1,6 @@
 import { Formik, useFormik } from "formik";
 import React from "react";
-import { toggleFormAction } from "../../../redux/slices/auth/authSlice";
+import { setDataUserAction, toggleFormAction } from "../../../redux/slices/auth/authSlice";
 import { dispatchType } from "../../../redux/store/index";
 import { useDispatch } from "react-redux";
 import LineDivisory from "../components/LineDivisory";
@@ -10,6 +10,8 @@ import { initialValuesLogin } from "../../../formik/initialValues";
 import { validationSchemaLoguin } from "../../../formik/validationSchema";
 import ContainerFormField from "../components/ContainerFormField";
 import ButtonSignIn from "../components/ButtonSignIn";
+import { authLogin } from "../../../axios/auth/authLogin";
+import { useNavigate } from "react-router";
 
 const Form = styled.form`
   width: 100%;
@@ -48,13 +50,21 @@ const Form = styled.form`
 
 const AuthLogin = () => {
   const dispatch = useDispatch<dispatchType>();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: initialValuesLogin,
     validationSchema: validationSchemaLoguin,
     onSubmit: async (values, actions) => {
-      console.log(values);
-      return;
+      const { email, password } = values;
+      const user = await authLogin({ email, password });
+      if (user) {
+        actions.resetForm();
+        const { msj, ...userData } = user;
+        dispatch(setDataUserAction(userData));
+        navigate("/");
+        alert(`Te haz logueado correctamente, bienvenido ${user.usuario.nombre}`);
+      }
     },
   });
 
