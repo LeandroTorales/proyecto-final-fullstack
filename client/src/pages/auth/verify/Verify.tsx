@@ -7,6 +7,7 @@ import { dispatchType } from "../../../redux/store";
 import { authVerify } from "../../../axios/auth/authVerify";
 import { toggleFormAction } from "../../../redux/slices/auth/authSlice";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const ContainerMainVerify = styled.div`
   height: 100vh;
@@ -45,8 +46,8 @@ const ContainerMainVerify = styled.div`
         font-size: 1.2rem;
       }
       input {
-        -webkit-appearance: none; /* Safari/Chrome */
-        appearance: none; /* Otros navegadores */
+        -webkit-appearance: none;
+        appearance: none;
       }
 
       button {
@@ -80,8 +81,8 @@ const ContainerMainVerify = styled.div`
 
 const Verify = () => {
   const dispatch = useDispatch<dispatchType>();
-
   const navigate = useNavigate();
+  const [isError, setIsError] = useState<Error | null>(null);
 
   const formik = useFormik({
     initialValues: initialValuesVerify,
@@ -89,7 +90,7 @@ const Verify = () => {
     onSubmit: async (values, actions) => {
       const { email, code } = values;
       const newCode = Number(code);
-      const userVerify = await authVerify({ email, newCode });
+      const userVerify = await authVerify({ email, newCode }).catch((error) => setIsError(error));
       if (userVerify) {
         actions.resetForm();
         dispatch(toggleFormAction());
@@ -97,13 +98,11 @@ const Verify = () => {
           "Te haz verificado correctamente, te estamos redirigiendo a la pagina de logueo de usuarios."
         );
         return setTimeout(() => {
-          navigate("/auth");
+          navigate("/profile");
         }, 1000);
       }
     },
   });
-
-  /* TERMINAR VERIFICACION DE CODIGO */
 
   const limitarCifras = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
@@ -142,6 +141,7 @@ const Verify = () => {
           />
           <button type="submit">Enviar código</button>
         </form>
+        {isError !== null ? <h4>{isError.message}</h4> : null}
       </div>
     </ContainerMainVerify>
   );

@@ -118,10 +118,10 @@ const Navbar = () => {
       <ul className={`${stateActiveMenu ? "active" : ""}`}>
         <ItemOfNavbar to="/">Home</ItemOfNavbar>
         <ItemOfNavbar to="/juegos">Juegos</ItemOfNavbar>
-        {Object.keys(isCurrentUser).length === 0 ? (
+        {isCurrentUser === undefined ? (
           <ItemOfNavbar to="/auth" icon={<AiOutlineUser />} />
         ) : (
-          <ItemOfNavbar to="/verify">{isCurrentUser.usuario.nombre}</ItemOfNavbar>
+          <ItemOfNavbar to="/profile">{isCurrentUser.usuario.nombre}</ItemOfNavbar>
         )}
         <ItemOfNavbar to="/cart" icon={<AiOutlineShoppingCart />} />
       </ul>

@@ -11,6 +11,7 @@ import styled from "styled-components";
 import ButtonSignIn from "../components/ButtonSignIn";
 import { authRegister } from "../../../axios/auth/authRegister";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Form = styled.form`
   width: 100%;
@@ -20,6 +21,8 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
+  gap: 10px;
+  text-align: center;
   .wrapper {
     width: 100%;
     display: flex;
@@ -29,6 +32,7 @@ const Form = styled.form`
     gap: 15px;
     p {
       font-size: 1.2rem;
+      text-align: center;
       button {
         margin-left: 10px;
         background-color: transparent;
@@ -53,6 +57,8 @@ const Form = styled.form`
 const AuthRegister = () => {
   const dispatch = useDispatch<dispatchType>();
   const navigate = useNavigate();
+  const [spinnerBoolean, setSpinnerBoolean] = useState(false);
+  const [isError, setIsError] = useState<Error | null>(null);
 
   const formik = useFormik({
     initialValues: initialValuesRegister,
@@ -60,15 +66,21 @@ const AuthRegister = () => {
     onSubmit: async (values, actions) => {
       const { email, password } = values;
       const nombre = `${values.name} ${values.surname}`;
-      const user = await authRegister({ nombre, email, password });
+      setSpinnerBoolean(true);
+      const user = await authRegister({ nombre, email, password }).catch((error) =>
+        setIsError(error)
+      );
       if (user) {
         actions.resetForm();
+        setSpinnerBoolean(false);
+        navigate("/verify");
         alert(
           "Te has registrado correctamente, te estamos redirigiendo a la página de verificaciond de usuarios."
         );
-        return setTimeout(() => {
-          navigate("/verify");
-        }, 1000);
+      }
+      if (user === undefined) {
+        actions.resetForm();
+        return setSpinnerBoolean(false);
       }
     },
   });
@@ -131,8 +143,8 @@ const AuthRegister = () => {
             max={255}
           />
         </ContainerFormField>
-
-        <ButtonSignIn />
+        {isError !== null ? <h4>{isError.message}</h4> : null}
+        <ButtonSignIn spinner={spinnerBoolean} />
         <div className="wrapper">
           <LineDivisory />
           <p>

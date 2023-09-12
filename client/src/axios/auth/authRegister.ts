@@ -17,6 +17,6 @@ export const authRegister = async ({ nombre, email, password }: Props): Promise<
     return response.data;
   } catch (error) {
     console.log(error);
-    throw new Error("Ocurrió un error.");
+    throw new Error("Ocurrió un error. Revisa que los campos esten ingresados correctamente.");
   }
 };

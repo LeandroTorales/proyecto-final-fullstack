@@ -1,5 +1,4 @@
-import { Formik, useFormik } from "formik";
-import React from "react";
+import { useFormik } from "formik";
 import { setDataUserAction, toggleFormAction } from "../../../redux/slices/auth/authSlice";
 import { dispatchType } from "../../../redux/store/index";
 import { useDispatch } from "react-redux";
@@ -12,6 +11,7 @@ import ContainerFormField from "../components/ContainerFormField";
 import ButtonSignIn from "../components/ButtonSignIn";
 import { authLogin } from "../../../axios/auth/authLogin";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const Form = styled.form`
   width: 100%;
@@ -21,6 +21,8 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
+  gap: 10px;
+  text-align: center;
   .wrapper {
     width: 100%;
     display: flex;
@@ -30,6 +32,7 @@ const Form = styled.form`
     gap: 15px;
     p {
       font-size: 1.2rem;
+      text-align: center;
       button {
         margin-left: 10px;
         background-color: transparent;
@@ -49,6 +52,8 @@ const Form = styled.form`
 `;
 
 const AuthLogin = () => {
+  const [spinnerBoolean, setSpinnerBoolean] = useState(false);
+  const [isError, setIsError] = useState<Error | null>(null);
   const dispatch = useDispatch<dispatchType>();
   const navigate = useNavigate();
 
@@ -57,13 +62,21 @@ const AuthLogin = () => {
     validationSchema: validationSchemaLoguin,
     onSubmit: async (values, actions) => {
       const { email, password } = values;
-      const user = await authLogin({ email, password });
+      setSpinnerBoolean(true);
+      const user = await authLogin({ email, password }).catch((error) => {
+        setIsError(error);
+      });
       if (user) {
         actions.resetForm();
+        setSpinnerBoolean(false);
         const { msj, ...userData } = user;
         dispatch(setDataUserAction(userData));
-        navigate("/");
         alert(`Te haz logueado correctamente, bienvenido ${user.usuario.nombre}`);
+        return navigate("/profile");
+      }
+      if (user === undefined) {
+        actions.resetForm();
+        return setSpinnerBoolean(false);
       }
     },
   });
@@ -102,14 +115,15 @@ const AuthLogin = () => {
             max={255}
           />
         </ContainerFormField>
-        <ButtonSignIn />
+        {isError !== null ? <h4>{isError.message}</h4> : null}
+        <ButtonSignIn spinner={spinnerBoolean} />
 
         <div className="wrapper">
           <LineDivisory />
           <p>
-            ¿Ya estás registrado?
+            ¿No estas registrado?
             <button onClick={() => dispatch(toggleFormAction())}>
-              Inicia sesion haciendo click aquí.
+              Registrate haciendo click aquí.
             </button>
           </p>
         </div>
