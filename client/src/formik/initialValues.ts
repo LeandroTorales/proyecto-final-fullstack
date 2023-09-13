@@ -14,3 +14,12 @@ export const initialValuesVerify = {
   email: "",
   code: "",
 };
+
+export const initialValuesCheckout = {
+  nombreDestinatario: "",
+  direccion: "",
+  codigoPostal: "",
+  ciudad: "",
+  cellphone: "",
+};
+

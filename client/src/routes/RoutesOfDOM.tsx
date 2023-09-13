@@ -8,6 +8,7 @@ import Cart from "../pages/cart/Cart";
 import Auth from "../pages/auth/Auth";
 import Verify from "../pages/auth/verify/Verify";
 import Profile from "../pages/profile/Profile";
+import FormCheckout from "../pages/cart/checkout/FormCheckout";
 
 const RoutesOfDOM = () => {
   const { pathname } = useLocation();
@@ -25,6 +26,7 @@ const RoutesOfDOM = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/verify" element={<Verify />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/checkout" element={<FormCheckout />} />
     </Routes>
   );
 };

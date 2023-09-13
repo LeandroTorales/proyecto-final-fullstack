@@ -20,11 +20,11 @@ export interface InterfaceProductDetails {
 
 export interface InterfaceOrders {
   user: ObjectId;
+  status: string;
+  createdAt: Date;
   products: InterfaceProductDetails[];
   shippingDetails: InterfaceShippingDetails;
   shippingCost: number;
-  status: string;
-  createdAt: Date;
 }
 
 const SchemaOrders = new Schema<InterfaceOrders>({

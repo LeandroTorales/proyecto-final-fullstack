@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootStateType } from "../../redux/store";
 import { useEffect, useState } from "react";
 import { ProductsInCart } from "../../redux/slices/products/utils/addProductToCart";
 import ButtonPurchase from "./ButtonPurchase";
+import { dispatchType } from "../../redux/store/index";
+import { shippingCostAction } from "../../redux/slices/products/products";
 
 const ContainerResumeCartMain = styled.div`
   display: flex;
@@ -45,6 +47,7 @@ const ResumeCart = () => {
   const [shippingCost, setShippingCost] = useState(2500);
   const [totalProducts, setTotalProducts] = useState(0);
   const productsInCart = useSelector((state: RootStateType) => state.productsSlice.productsInCart);
+  const dispatch = useDispatch<dispatchType>();
 
   const priceSubtotalOfCart = (): any => {
     return productsInCart.reduce((prev: number, cur: ProductsInCart) => {
@@ -68,8 +71,10 @@ const ResumeCart = () => {
 
   const handleShippingCostFree = (): number => {
     if (priceSubtotalOfCart() <= 150000) {
+      dispatch(shippingCostAction(shippingCost));
       return shippingCost;
     }
+    dispatch(shippingCostAction(0));
     return 0;
   };
 

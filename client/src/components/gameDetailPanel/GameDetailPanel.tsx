@@ -53,8 +53,23 @@ const ContainerInfoProduct = styled.div`
     font-size: clamp(16px, 10vw, 35px);
     font-weight: 700;
   }
-  span {
-    font-size: 1.5rem;
+`;
+
+const PriceWithoutDiscount = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.5rem;
+  span:nth-child(1) {
+    text-decoration: line-through;
+    text-decoration-color: red;
+  }
+  span:nth-child(2),
+  span:nth-child(3) {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-decoration: underline;
   }
 `;
 
@@ -202,7 +217,13 @@ const GameDetailPanel = () => {
   const handleAddProductToCart = (): void => {
     setAnimation(true);
     setDisabled(true);
-    dispatch(productsInCartAction({ ...product, quantity: numberInput }));
+    dispatch(
+      productsInCartAction({
+        ...product,
+        quantity: numberInput,
+        price: product.price * (1 - product.discount / 100),
+      })
+    );
     setTimeout(() => {
       setAnimation(false);
       setDisabled(false);
@@ -222,9 +243,15 @@ const GameDetailPanel = () => {
         </ContainerImg>
         <ContainerInfoProduct>
           <h2>{product.nameGame}</h2>
-          <span>
-            ${product.price.toFixed(2)} {product.divisa}
-          </span>
+          <PriceWithoutDiscount>
+            <span>
+              ${product.price.toFixed(2)} {product.divisa}
+            </span>
+            <span>{product.discount}% OFF</span>
+            <span>
+              ${(product.price * (1 - product.discount / 100)).toFixed(2)} {product.divisa} c/u
+            </span>
+          </PriceWithoutDiscount>
 
           {handleProductStock(productsInCart, { ...product, quantity: numberInput }) === 0 ? (
             <ProductoAgotado>
