@@ -47,7 +47,6 @@ const FormCheckout = () => {
   const productsInCart = useSelector((state: RootStateType) => state.productsSlice.productsInCart);
   const currentUser = useSelector((state: RootStateType) => state.authSlice.currentUser);
   const shippingCost = useSelector((state: RootStateType) => state.productsSlice.shippingCost);
-  console.log("currentUser:", currentUser);
   const dispatch = useDispatch<dispatchType>();
   const navigate = useNavigate();
 

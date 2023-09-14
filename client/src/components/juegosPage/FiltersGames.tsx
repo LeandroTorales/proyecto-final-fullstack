@@ -135,10 +135,6 @@ const FiltersGames = () => {
       dispatch(toggleFiltersMenuAction());
     }, 1000);
   };
-  useEffect(() => {
-    console.log(inputValueState);
-
-  }, [inputValueState]);
 
   return (
     <>
