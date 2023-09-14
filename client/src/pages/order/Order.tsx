@@ -102,6 +102,9 @@ const Order = () => {
           Estado de compra:
           <span> {order.status === "pending" ? "pendiente" : "entregada"}</span>
         </span>
+        <span>
+          Código de compra: <span>{idOrder}</span>
+        </span>
       </WrapperInfoOrder>
       <WrapperInfoShipping>
         <span>
