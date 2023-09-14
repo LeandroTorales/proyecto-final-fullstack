@@ -25,11 +25,13 @@ interface Products {
     stock: number;
     quantity: number;
   }[];
+  shippingCost: number;
 }
 
 const initialState: Products = {
   products: products,
   productsInCart: [],
+  shippingCost: 2500,
 };
 
 const productsSlice: any = createSlice({
@@ -57,6 +59,12 @@ const productsSlice: any = createSlice({
         productsInCart: initialState.productsInCart,
       };
     },
+    shippingCostAction: (state, action) => {
+      return {
+        ...state,
+        shippingCost: action.payload,
+      };
+    },
   },
 });
 
@@ -65,5 +73,6 @@ export const {
   productsInCartAction,
   removeProductFromCartAction,
   cleanCartAction,
+  shippingCostAction,
 } = productsSlice.actions;
 export default productsSlice.reducer;

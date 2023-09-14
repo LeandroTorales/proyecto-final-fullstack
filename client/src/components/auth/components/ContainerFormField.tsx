@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface Props {
   children: React.ReactNode;
+  classname?: any;
 }
 
 const ContainerStyled = styled.div`
@@ -14,8 +15,8 @@ const ContainerStyled = styled.div`
   gap: 25px;
 `;
 
-const ContainerFormField = ({ children }: Props) => {
-  return <ContainerStyled>{children}</ContainerStyled>;
+const ContainerFormField = ({ children, classname }: Props) => {
+  return <ContainerStyled className={classname}>{children}</ContainerStyled>;
 };
 
 export default ContainerFormField;
