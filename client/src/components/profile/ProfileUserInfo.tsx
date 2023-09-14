@@ -66,7 +66,6 @@ const ProfileUserInfo = () => {
   const navigate = useNavigate();
   const { token } = useSelector((state: RootStateType) => state.authSlice.currentUser);
   const currentOrders = useSelector((state: RootStateType) => state.authSlice.ordersOfUser);
-  console.log("currentOrders:", currentOrders);
   const dispatch = useDispatch<dispatchType>();
 
   const getOrdersFromDB = async () => {
@@ -78,7 +77,10 @@ const ProfileUserInfo = () => {
   };
 
   useEffect(() => {
-    getOrdersFromDB();
+    async function getOrders() {
+      await getOrdersFromDB();
+    }
+    getOrders();
   }, []);
 
   return (
