@@ -17,6 +17,7 @@ const ContainerMain = styled.div`
   background-color: #e9e9e9;
   position: fixed;
   z-index: 9999;
+  text-align: center;
   .logoMain {
     font-size: 30px;
     text-align: center;

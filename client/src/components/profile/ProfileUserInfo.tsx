@@ -51,7 +51,7 @@ const ContainerOrderInfo = styled.div`
   }
 `;
 
-interface InterfaceOrderOfUser {
+export interface InterfaceOrderOfUser {
   createdAt: string;
   products: InterfaceProductDetails[];
   shippingCost: number;
@@ -97,8 +97,7 @@ const ProfileUserInfo = () => {
               <span>
                 Total de productos: {order.products.reduce((prev, cur) => prev + cur.quantity, 0)}
               </span>
-              <button type="button" onClick={() => navigate("/")}>
-                {/* Hacer renderizado dinamico de orden */}
+              <button type="button" onClick={() => navigate(`/order/${order._id}`)}>
                 Más información
               </button>
             </ContainerOrderInfo>

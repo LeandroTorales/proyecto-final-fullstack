@@ -9,6 +9,7 @@ import Auth from "../pages/auth/Auth";
 import Verify from "../pages/auth/verify/Verify";
 import Profile from "../pages/profile/Profile";
 import FormCheckout from "../pages/cart/checkout/FormCheckout";
+import Order from "../pages/order/Order";
 
 const RoutesOfDOM = () => {
   const { pathname } = useLocation();
@@ -27,6 +28,7 @@ const RoutesOfDOM = () => {
       <Route path="/verify" element={<Verify />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/checkout" element={<FormCheckout />} />
+      <Route path="/order/:idOrder" element={<Order />} />
     </Routes>
   );
 };

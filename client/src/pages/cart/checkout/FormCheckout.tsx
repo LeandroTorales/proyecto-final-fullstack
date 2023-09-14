@@ -77,9 +77,7 @@ const FormCheckout = () => {
       if (orderPeticion) {
         actions.resetForm();
         dispatch(cleanCartAction());
-        navigate("/");
-        /* Hacer checkout resume con el return de la peticion post del orderPeticion */
-        console.log("orderPeticion:", orderPeticion);
+        navigate("/profile");
         return alert(
           `Haz encargado un pedido, muchas gracias por su compra ${currentUser.usuario.nombre}`
         );
