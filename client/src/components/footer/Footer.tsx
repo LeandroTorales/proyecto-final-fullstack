@@ -97,7 +97,10 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <p>Copyright {date.getFullYear()} ©GameMarket</p>
+          <p>
+            Copyright {date.getFullYear()} ©GameMarket <br />
+            Página hecha por Leandro Federico Torales
+          </p>
         </div>
       </ContainerMainFooter>
     </>
