@@ -98,7 +98,7 @@ const Verify = () => {
           "Te haz verificado correctamente, te estamos redirigiendo a la pagina de logueo de usuarios."
         );
         return setTimeout(() => {
-          navigate("/profile");
+          navigate("/auth");
         }, 1000);
       }
     },
