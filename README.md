@@ -24,4 +24,4 @@ Además, podrán marcar las tareas como completadas, editarlas y eliminarlas.
 
 ## Contacto
 
-Si se tienen dudas con el proyecto o quieres contactarme, puedes hacerlo mediante mi dirección de email leandrotorales1234@gmail.com
+Si se tienes dudas con el proyecto o quieres contactarme, puedes hacerlo mediante mi dirección de email leandrotorales1234@gmail.com
