@@ -5,8 +5,8 @@ El objetivo del proyecto es incorporar los conocimientos aprendidos de front end
 
 ## Descripción
 
-El proyecto se trata de un ecommerce de una tienda de videojuegos, en los que se podrán hacer registro e inicio de sesión de usuarios, compras de productos simuladas, utilizando tecnicas de frontEnd y backEnd
-Además, podrán marcar las tareas como completadas, editarlas y eliminarlas.
+El proyecto se trata de un ecommerce de una tienda de videojuegos, en los que se podrán hacer registro e inicio de sesión de usuarios, compras de productos simuladas, utilizando tecnicas de frontEnd y backEnd.
+Podrán marcar las tareas como completadas, editarlas y eliminarlas.
 
 ## Funcionalidades Principales
 
